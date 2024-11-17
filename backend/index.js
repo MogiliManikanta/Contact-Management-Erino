@@ -5,7 +5,12 @@ const PORT = 8000;
 const app = express();
 const userRouter = require("./routes/userRouter");
 
-app.use(cors({ origin: "http://localhost:3000" })); // Allow frontend origin
+app.use(cors({ 
+  origin: ["https://Contact-Management-123.vercel.app"], // Update if needed
+  methods: ["POST", "GET"], // Corrected to an array
+  credentials: true 
+})); // Allow frontend origin
+
 app.use(express.json());
 
 // Import the User model
@@ -14,11 +19,8 @@ const User = require("./models/user");
 // MongoDB Connection
 connectDB();
 
+// Routes
 app.use("/contacts", userRouter);
-
-// Create a new user
-
-// Get a user by ID
 
 // Start the server
 app.listen(PORT, () => {
